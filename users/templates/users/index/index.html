@@ -1,0 +1,35 @@
+{% extends 'users/base.html' %}
+{% load static %}
+
+{% block title %} Главная {% endblock title %}
+
+{% block content %}
+    <section class="home d-flex flex-column">
+        <div class="home-title">
+            <a href="#" class="home-btn mt-4">Все сауны</a>
+        </div>
+        <div class="home-recomendation">
+            <div class="rec-title">
+                <h3><span>Популярные сауны</span></h3>
+            </div>
+        </div>
+        <div class="home-cards">
+            {% for sauna in saunas %}
+                <a href="{{ sauna.get_absolute_url }}" class="home-card">
+                    <img src="{% if sauna.image %}{{sauna.image.url}}{%else%}{% static 'img/noimage.png' %}{% endif %}" class="card-img" alt="">
+                    <h5 class="title-card">{{sauna.name}}</h5>
+                    {% if sauna.discount %}
+                        <div class="card-discount">
+                            <p class="line">{{ sauna.price_per_hour}}</p>
+                            <p>{{ sauna.sell_price }}</p>
+                        </div>
+                    {% else %}
+                        <p class="price">{{ sauna.price_per_hour }}</p>
+                    {% endif %}
+                </a>
+            {% endfor %}
+        </div>
+    </section>
+
+
+{% endblock content %}

@@ -1,0 +1,48 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}{% endblock title %}</title>
+
+    <!--    bootstrap-->
+    <link rel="stylesheet" href="{% static 'bootstrap\css\bootstrap.min.css'%}">
+    <!--  css  -->
+    <link rel="stylesheet" href="{% static 'css\base.css' %}">
+</head>
+<body>
+    <header class="header sticky-top">
+        <div class="header-container d-flex">
+            <div class="header-logo">
+                <a href="/"><img src="{% static 'img/logo.png' %}" alt="" class="sp-logo"></a>
+            </div>
+            <navbar class="header-nav pt-4">
+                <ul class="header-list d-flex">
+                    <li>
+                        <a href="/" class="nav-a m-3">Главная</a>
+                    </li>
+                    <li>
+                        <a href="#" class="nav-a m-3">Бронь></a>
+                    </li>
+                    <li>
+                        <a href="#" class="nav-a m-3">Услуги</a>
+                    </li>
+                    <li>
+                        <a href="#" class="nav-a m-3">Отзывы</a>
+                    </li>
+                </ul>
+            </navbar>
+            <div class="header-profile">
+                <a href="#" class="m-3">Войти</a>
+            </div>
+        </div>
+    </header>
+    <div class="container">
+        {% block content %}
+        {% endblock content %}
+    </div>
+
+    <!--    js for bootstrap-->
+    <script src="{% static 'bootstrap\js\bootstrap.bundle.min.js' %}"></script>
+</body>
+</html>
