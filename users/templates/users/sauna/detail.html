@@ -4,7 +4,7 @@
 {% block title %} {{sauna.name}} {% endblock title %}
 
 {%block content%}
-    <div class="detail-sauna">
+    <div class="detail-sauna d-flex gap-3">
         <div class="detail-img">
             <img src="{% if sauna.image %}{{sauna.image.url}}{%else%}{% static 'img/noimage.png' %}{% endif %}" alt="" class="detail-image">
         </div>
@@ -13,14 +13,14 @@
                 <h3>Категория: {{ sauna.category }} </h3>
                 <p>Description: {{sauna.description|linebreaks}} </p>
                 {% if sauna.discount %}
-                    <div class="card-discount">
-                        <p class="line">{{ sauna.price_per_hour}}</p>
-                        <p>{{ sauna.sell_price }}</p>
+                    <div class="card-discount d-flex gap-2">
+                        <p class="line">$ {{ sauna.price_per_hour}}</p>
+                        <p>$ {{ sauna.sell_price }}</p>
                     </div>
                 {% else %}
-                    <p class="price">{{ sauna.price_per_hour }}</p>
+                    <p class="price">$ {{ sauna.price_per_hour }}</p>
                 {% endif %}
-                <a href="#" class="cart-btn">Забронировать</a>
+                <a href="#" class="cart-btn d-flex align-items-center justify-content-center">Забронировать</a>
             </div>
     </div>
 {%endblock content%}

@@ -1,5 +1,9 @@
-from django.http import HttpResponse
+from zoneinfo import available_timezones
+
+from django.http import HttpResponse, Http404
 from django.shortcuts import render, get_object_or_404
+from unicodedata import category
+
 from .models import Saunas, Category
 
 # Create your views here.
@@ -12,11 +16,31 @@ def popular_list(request):
                    "users/index/index.html",
                    {'saunas':saunas})
 
-def sauna_detail(request,slug):
-    sauna = get_object_or_404(Saunas,
-                               slug=slug,
-                               available=True)
+
+def sauna_detail(request, slug):
+    sauna = Saunas.objects.filter(slug=slug, available=True).first()
+
+    if sauna is None:
+        raise Http404("Sauna not found")  # Вместо None — 404
+
+    return render(request, 'users/sauna/detail.html', {'sauna': sauna})
+
+def saunas_list(request, category_slug=None):
+    category = None
+    categories = Category.objects.all()
+    saunas = Saunas.objects.filter(available=True)
+    if category_slug:
+        category = get_object_or_404(Category,slug=category_slug)
+        saunas = saunas.filter(category=category)
     return render(request,
-                  'users/sauna/detail.html',
-                  {'sauna': sauna}),
+                  'users/sauna/list.html',
+                  {'category':category,
+                            'categories':categories,
+                            'saunas':saunas},)
+
+
+
+
+
+
 

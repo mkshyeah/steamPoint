@@ -5,22 +5,22 @@
 
 {% block content %}
     <section class="home d-flex flex-column">
-        <div class="home-title">
+        <div class="home-title d-flex flex-column align-items-center">
             <a href="#" class="home-btn mt-4">Все сауны</a>
         </div>
         <div class="home-recomendation">
-            <div class="rec-title">
+            <div class="rec-title mb-4">
                 <h3><span>Популярные сауны</span></h3>
             </div>
         </div>
-        <div class="home-cards">
+        <div class="home-cards d-flex gap-4">
             {% for sauna in saunas %}
-                <a href="{{ sauna.get_absolute_url }}" class="home-card">
+                <a href="{{ sauna.get_absolute_url }}" class="home-card d-flex flex-column align-items-center text-center">
                     <img src="{% if sauna.image %}{{sauna.image.url}}{%else%}{% static 'img/noimage.png' %}{% endif %}" class="card-img" alt="">
                     <h5 class="title-card">{{sauna.name}}</h5>
                     {% if sauna.discount %}
-                        <div class="card-discount">
-                            <p class="line">{{ sauna.price_per_hour}}</p>
+                        <div class="card-discount d-flex gap-2">
+                            <p class="line">{{ sauna.price_per_hour }}</p>
                             <p>{{ sauna.sell_price }}</p>
                         </div>
                     {% else %}
