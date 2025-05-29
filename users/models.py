@@ -7,6 +7,7 @@ class Category(models.Model):
     name = models.CharField(max_length=20,
                             unique=True)
     slug = models.SlugField()
+    description = models.TextField(blank=True)
 
     class Meta:
         ordering = ["name"]
@@ -16,6 +17,10 @@ class Category(models.Model):
 
     def __str__(self):
         return self.name
+
+    def get_absolute_url(self):
+        return reverse('users:saunas_list_by_category',
+                        args=[self.slug])
 
 class Saunas(models.Model):
     category = models.ForeignKey(Category,

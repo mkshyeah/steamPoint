@@ -11,7 +11,7 @@
         <div class="detail-description">
                 <h2>{{sauna.name}}</h2>
                 <h3>Категория: {{ sauna.category }} </h3>
-                <p>Description: {{sauna.description|linebreaks}} </p>
+                <p>Описание: {{sauna.description|linebreaks}} </p>
                 {% if sauna.discount %}
                     <div class="card-discount d-flex gap-2">
                         <p class="line">$ {{ sauna.price_per_hour}}</p>
