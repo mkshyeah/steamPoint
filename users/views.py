@@ -2,9 +2,11 @@ from zoneinfo import available_timezones
 
 from django.http import HttpResponse, Http404
 from django.shortcuts import render, get_object_or_404
+>> from django.core.paginator import Paginator
 from unicodedata import category
 
 from .models import Saunas, Category
+
 
 # Create your views here.
 def index(request):
@@ -26,17 +28,24 @@ def sauna_detail(request, slug):
     return render(request, 'users/sauna/detail.html', {'sauna': sauna})
 
 def saunas_list(request, category_slug=None):
+    page = request.GET.get('page',1)
     category = None
     categories = Category.objects.all()
+    paginator = Paginator(saunas,1)
+    current_page=paginator.page(int(page))
     saunas = Saunas.objects.filter(available=True)
     if category_slug:
-        category = get_object_or_404(Category,slug=category_slug)
-        saunas = saunas.filter(category=category)
+        category = get_object_or_404(Category,
+                                     slug=category_slug)
+        paginator=Paginator(saunas.filter(category=category),1)
+        current_page = paginator.page(int(page))
     return render(request,
                   'users/sauna/list.html',
                   {'category':category,
                             'categories':categories,
-                            'saunas':saunas},)
+                            'saunas':current_page,
+                            'slug_url': category_slug},)
+
 
 
 
