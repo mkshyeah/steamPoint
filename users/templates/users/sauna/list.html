@@ -26,17 +26,17 @@
         <div class="items">
           {% for sauna in saunas %} 
             <div class="item">
-              <a href="{{sauna.get_absolute_url}} class='home-card' d-flex flex-column align-items-center text-center">
+              <a href="{{ sauna.get_absolute_url }}" class="home-card d-flex flex-column align-items-center text-center">
                 <img src="{% if sauna.image %}{{sauna.image.url}}{%else%}{% static 'img/noimage.png' %}{% endif %}" class="card-img" alt="">
                 <h5 class="title-card">{{sauna.name}}</h5>
                 {% if sauna.discount %}
-                        <div class="card-discount d-flex gap-2">
-                            <p class="line">{{ sauna.price_per_hour }}</p>
-                            <p>{{ sauna.sell_price }}</p>
-                        </div>
-                    {% else %}
-                        <p class="price">{{ sauna.price_per_hour }}</p>
-                    {% endif %}
+                    <div class="card-discount d-flex gap-2">
+                        <p class="line">{{ sauna.price_per_hour }}</p>
+                        <p class="price">{{ sauna.sell_price }}</p>
+                    </div>
+                {% else %}
+                    <p class="price">{{ sauna.price_per_hour }}</p>
+                {% endif %}
               </a>
             </div>
           {% endfor %}
@@ -44,7 +44,7 @@
       </div>
       <ul class="pagination">
         <li class="{%if not saunas.has_previous %} disabled {% endif %}">
-          <a href="{% if saunas.has_previous %}?page={{saunas.previous_page_number}}{% endif %}">Назад</a>
+          <a href="{% if saunas.has_previous %}?page={{saunas.previous_page_number}}{% endif %}">Предыдущий</a>
         </li>
         {% for page in saunas.paginator.page_range %}
           {% if page >= saunas.number|add:-2 and page <= saunas.number|add:2%}
@@ -53,6 +53,9 @@
             </li>
           {% endif %}
         {% endfor %}
+        <li class="{%if not saunas.has_next %} disabled {% endif %}">
+          <a href="{% if saunas.has_next %}?page={{saunas.next_page_number}}{% endif %}">Следующий</a>
+        </li>
       </ul>
     </div>
   </div>

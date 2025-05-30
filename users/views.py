@@ -2,7 +2,7 @@ from zoneinfo import available_timezones
 
 from django.http import HttpResponse, Http404
 from django.shortcuts import render, get_object_or_404
->> from django.core.paginator import Paginator
+from django.core.paginator import Paginator
 from unicodedata import category
 
 from .models import Saunas, Category
@@ -31,13 +31,13 @@ def saunas_list(request, category_slug=None):
     page = request.GET.get('page',1)
     category = None
     categories = Category.objects.all()
-    paginator = Paginator(saunas,1)
-    current_page=paginator.page(int(page))
     saunas = Saunas.objects.filter(available=True)
+    paginator = Paginator(saunas,10)
+    current_page=paginator.page(int(page))
     if category_slug:
         category = get_object_or_404(Category,
                                      slug=category_slug)
-        paginator=Paginator(saunas.filter(category=category),1)
+        paginator=Paginator(saunas.filter(category=category),10)
         current_page = paginator.page(int(page))
     return render(request,
                   'users/sauna/list.html',
