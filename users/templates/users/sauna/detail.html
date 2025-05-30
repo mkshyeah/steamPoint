@@ -20,8 +20,13 @@
                 {% else %}
                     <p class="price">$ {{ sauna.price_per_hour }}</p>
                 {% endif %}
-
-                <a href="#" class="cart-btn d-flex align-items-center justify-content-center">Забронировать</a>
+                <form action="{%url "booking:booking_add" sauna.id%}" class="qform" method="post">
+                  <div class="booking-form">
+                    {{ booking_sauna_form }}
+                    {% csrf_token %}
+                  </div>
+                  <input type="submit" class="add-to-booking-btn" value="Забронировать">
+                </form>
             </div>
     </div>
 {%endblock content%}

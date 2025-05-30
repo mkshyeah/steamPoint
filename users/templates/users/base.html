@@ -33,8 +33,18 @@
                     </li>
                 </ul>
             </navbar>
-            <div class="header-profile">
+            <div class="header-profile pt-2">
+                <a href="{% url "booking:booking_detail" %}"><img src="{% static 'img/venik.png' %}" class="venik" alt=""></a>
                 <a href="#" class="m-3">Войти</a>
+                <p class="booking-quantity">
+                  {% with booking_quantity=booking|length %}
+                    {% if cart_quantity > 0 %}
+                      {{ booking_quantity }}
+                    {% else %}
+                      0
+                    {% endif %}
+                  {% endwith %}
+                </p>
             </div>
         </div>
     </header>

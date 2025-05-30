@@ -7,7 +7,8 @@ SAUNA_QUANTITY_CHOICES = [(i,str(i)) for i in range(1,11)]
 class BookingAddSaunaForm(forms.Form):
     quantity = forms.TypedChoiceField(
         choices=SAUNA_QUANTITY_CHOICES,
-        coerce = int
+        coerce = int,
+        label="Количество"
     )
     override = forms.BooleanField(required=False,
                                   initial=False,

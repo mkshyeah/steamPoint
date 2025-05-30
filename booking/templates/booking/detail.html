@@ -3,7 +3,7 @@
 
 {% block title %}Бронь{% endblock title %}
 
-{% block title %}
+{% block content %}
     <section class="booking d-flex">
       <div class="booking-title">
         <h2>Бронирование</h2>
@@ -23,9 +23,9 @@
                   <p>Кол-во: {{ item.quantity }}</p>
                 </div>
               </div>
-              <form action="{% url "booking:booking:remove" sauna.id%}" method="post>
+              <form action="{% url "booking:booking_remove" sauna.id %}" method="post">
                   <input type="submit" value="Удалить" class="remove-btn">
-              {% crsf_token %}
+              {% csrf_token %}
               </form>
               <div class="booking-card-price">
                     {% if sauna.discount %}
@@ -38,14 +38,21 @@
                     {% endif %}
               </div>
             </div>
+            {% endwith %}
         {% endfor %}
       </div>
       <div class="total">
-        <h5>Общая сумма% $ {{ booking.get_total_price }}</h5>
+        <h5>Общая сумма $ {{ booking.get_total_price }}</h5>
       </div>
       <div class="booking-buttons d-flex gap-3">
-        <a href="/shop" class="booing-btn">Продолжить покупки</a>
-        <a href="#" class="booking-btn">Оформить</a>
+        <a href="/shop" class="cart-btn">Продолжить покупки</a>
+        {% with booking_quantity=booking|length %}
+          {% if cart_quantity > 0 %}
+            <a href="#" class="cart-btn">Оформить</a>
+          {% endif %}
+        {% endwith %}       
       </div>
     </section>
-{% endblock title %}
+{% endblock content %}
+
+{%extends

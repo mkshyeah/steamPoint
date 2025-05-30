@@ -4,7 +4,7 @@ from django.http import HttpResponse, Http404
 from django.shortcuts import render, get_object_or_404
 from django.core.paginator import Paginator
 from unicodedata import category
-
+from booking.forms import BookingAddSaunaForm
 from .models import Saunas, Category
 
 
@@ -25,7 +25,9 @@ def sauna_detail(request, slug):
     if sauna is None:
         raise Http404("Sauna not found")  # Вместо None — 404
 
-    return render(request, 'users/sauna/detail.html', {'sauna': sauna})
+    booking_sauna_form =BookingAddSaunaForm
+    return render(request, 'users/sauna/detail.html', {'sauna': sauna,
+                                                       'booking_sauna_form':booking_sauna_form})
 
 def saunas_list(request, category_slug=None):
     page = request.GET.get('page',1)

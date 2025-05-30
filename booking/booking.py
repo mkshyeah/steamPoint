@@ -2,7 +2,7 @@ from decimal import Decimal
 from itertools import product
 
 from django.conf import settings
-from ..users.models import Saunas
+from users.models import Saunas
 
 class Booking:
     def __init__(self,request):
@@ -17,7 +17,7 @@ class Booking:
         sauna_id = str(sauna.id)
         if sauna_id not in self.booking:
             self.booking[sauna_id] = {'quantity':0,
-                                      'price':str(sauna.price)}
+                                      'price':str(sauna.price_per_hour)}
         if override_quantity:
             self.booking[sauna_id]['quantity'] = quantity
         else:
@@ -35,10 +35,10 @@ class Booking:
 
     def __iter__(self):
         sauna_ids = self.booking.keys()
-        saunas = Saunas.object.filter(id_in=sauna_ids)
-        booking = self.cart.copy()
+        saunas = Saunas.objects.filter(id__in=sauna_ids)
+        booking = self.booking.copy()
         for sauna in saunas:
-            booking[str(product.id)]['product'] = product
+            booking[str(sauna.id)]['sauna'] = sauna
         for item in booking.values():
             item['price'] = Decimal(item['price'])
             item['total_price'] = item['price'] * item['quantity']
@@ -49,5 +49,11 @@ class Booking:
 
     def clear(self):
         del self.session[settings.BOOKING_SESSION_ID]
+               
+    def get_total_price(self):
+      total = sum((Decimal(item['price'])-(Decimal(item['price'])
+              * Decimal(item['sauna'].discount/100)))*item['quantity']
+                for item in self.booking.values())
+      return format(total, '.2f')
 
 
