@@ -42,13 +42,13 @@
         {% endfor %}
       </div>
       <div class="total">
-        <h5>Общая сумма $ {{ booking.get_total_price }}</h5>
+        <h5>Общая сумма: $ {{ booking.get_total_price }}</h5>
       </div>
       <div class="booking-buttons d-flex gap-3">
-        <a href="/shop" class="cart-btn">Продолжить покупки</a>
+        <a href="/shop" class="booking-btn">Продолжить покупки</a>
         {% with booking_quantity=booking|length %}
-          {% if cart_quantity > 0 %}
-            <a href="#" class="cart-btn">Оформить</a>
+          {% if booking_quantity > 0 %}
+            <a href="#" class="booking-btn">Оформить</a>
           {% endif %}
         {% endwith %}       
       </div>

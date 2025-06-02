@@ -20,12 +20,13 @@
                     <h5 class="title-card">{{sauna.name}}</h5>
                     {% if sauna.discount %}
                         <div class="card-discount d-flex gap-2">
-                            <p class="line">{{ sauna.price_per_hour }}</p>
-                            <p>{{ sauna.sell_price }}</p>
+                            <p class="line">₸ {{ sauna.price_per_hour }}</p>
+                            <p class="price">₸ {{ sauna.sell_price }}</p>
                         </div>
                     {% else %}
-                        <p class="price">{{ sauna.price_per_hour }}</p>
+                        <p class="price">₸ {{ sauna.price_per_hour }}</p>
                     {% endif %}
+                    <p class="fs-7 mb-1">в час</p>
                 </a>
             {% endfor %}
         </div>
