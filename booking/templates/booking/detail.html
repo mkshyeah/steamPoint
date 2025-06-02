@@ -30,11 +30,11 @@
               <div class="booking-card-price">
                     {% if sauna.discount %}
                       <div class="card-discount d-flex gap-2">
-                          <p class="line">{{ sauna.price_per_hour }}</p>
-                          <p class="price">{{ sauna.sell_price }}</p>
+                          <p class="line">{{ sauna.price_per_hour }}₸</p>
+                          <p class="price">{{ sauna.sell_price }}₸</p>
                       </div>
                     {% else %}
-                      <p class="price">{{ sauna.price_per_hour }}</p>
+                      <p class="price">{{ sauna.price_per_hour }}₸</p>
                     {% endif %}
               </div>
             </div>
@@ -42,7 +42,7 @@
         {% endfor %}
       </div>
       <div class="total">
-        <h5>Общая сумма: $ {{ booking.get_total_price }}</h5>
+        <h5>Общая сумма: {{ booking.get_total_price }}₸</h5>
       </div>
       <div class="booking-buttons d-flex gap-3">
         <a href="/shop" class="booking-btn">Продолжить покупки</a>

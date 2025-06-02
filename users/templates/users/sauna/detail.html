@@ -14,11 +14,11 @@
                 <p>Описание: {{sauna.description|linebreaks}} </p>
                 {% if sauna.discount %}
                     <div class="card-discount d-flex gap-2">
-                        <p class="line">$ {{ sauna.price_per_hour}}</p>
-                        <p>$ {{ sauna.sell_price }}</p>
+                        <p class="line">{{ sauna.price_per_hour}}₸</p>
+                        <p class='price'>{{ sauna.sell_price }}₸</p>
                     </div>
                 {% else %}
-                    <p class="price">$ {{ sauna.price_per_hour }}</p>
+                    <p class="price">{{ sauna.price_per_hour }}₸</p>
                 {% endif %}
                 <form action="{%url "booking:booking_add" sauna.id%}" class="qform" method="post">
                   <div class="booking-form">
