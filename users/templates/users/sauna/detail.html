@@ -5,9 +5,9 @@
 
 {%block content%}
     <div class="detail-sauna d-flex gap-3">
-        <div class="detail-img">
+        <div class="detail-ima\">
             {% for image in sauna.images.all %}
-              <img class="detail-img" src="{{image.image.url}}" alt="" style="display: none;" data-index="{{ forloop.counter0 }}">
+              <img class="detail-image" src="{{image.image.url}}" alt="" style="display: none;" data-index="{{ forloop.counter0 }}">
             {% endfor %}
             <div class="image-nav">
               <button class="prev-btn">&lsaquo;</button>
@@ -15,7 +15,7 @@
             </div>
         </div>
         <script>
-          const images = document.querySelectorAll('.detail-img');
+          const images = document.querySelectorAll('.detail-image');
           const prevBtn = document.querySelector('.prev-btn');
           const nextBtn = document.querySelector('.next-btn');
           let currentIndex = 0;
