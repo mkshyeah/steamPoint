@@ -24,6 +24,7 @@ urlpatterns = [
     path('booking/', include('booking.urls', namespace='booking')),
     path('registration/',include('registration.urls',namespace='registration')),
     path('orders/',include('orders.urls',namespace='orders')),
+    path('payment/',include('payment.urls',namespace='payment')),
     path('',include('users.urls',namespace="users")),
 ]
 

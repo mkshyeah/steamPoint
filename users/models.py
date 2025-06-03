@@ -58,6 +58,14 @@ class Saunas(models.Model):
                         args=[self.slug])
 
     def sell_price(self):
-        if self.discount:
-            return round(self.price_per_hour - self.price_per_hour * self.discount / 100,2)
+      if self.discount:
+          return round(self.price_per_hour - self.price_per_hour * self.discount / 100, 2)
+      return self.price_per_hour
 
+class SaunasImage(models.Model):
+  sauna = models.ForeignKey(Saunas, related_name='images',
+                            on_delete=models.CASCADE)
+  image = models.ImageField(upload_to='saunas/%Y/%m/%d',blank=True)
+  
+  def __str__(self):
+      return f'{self.sauna.name}-{self.image.name}'

@@ -1,0 +1,52 @@
+{% extends "users/base.html" %}
+{% load static %}
+
+{% block title %}Процесс оплаты{% endblock title %}
+
+{% block content %}
+  <div class="window">
+    <h2 class="pay-title">
+      Оплата
+    </h2>
+    <div class="pay-card d-flex">
+      <div class="booking-cardsproc">
+        {% for item in order.items.all %}
+          {% with sauna=item.saunas %}
+            <div class="booking-card d-flex">
+              <div class="booking-card-img">
+                <img src="{% if sauna.image %}{{sauna.image.url}}{%else%}{% static 'img/noimage.png' %}{% endif %}" class="card-img" alt="">
+              </div>
+              <div class="booking-card-info">
+                <div class="booking-card-name">
+                  <p>{{sauna.name}}</p>
+                </div>
+                <div class="booking-card-q">
+                  <p>Кол-во: {{item.quantity}}</p>
+                </div>
+              </div>
+              <form action="{% url "booking:booking_remove" sauna.id %}" method="post">
+                <input type="submit" value="Удалить" class="remove-btn">
+                {% csrf_token %}
+              </form>
+              <div class="booking-card-price">
+                {% if sauna.discount %}
+                    <div class="card-price">
+                        <p class="line opac">{{ sauna.price_per_hour}}₸</p>
+                        <p class='booking-total-price-ots'>{{ sauna.sell_price }}₸</p>
+                    </div>
+                {% else %}
+                    <p class="booking-total-price">{{ sauna.price_per_hour }}₸</p>
+                {% endif %}
+              </div>
+            </div>
+          {% endwith %}
+        {% endfor %}
+
+        <form action="{% url "payment:process" %}" method="post" class="payform">
+          <input type="submit" value="Оплатить сейчас" clas="paynow">
+          {% csrf_token %}
+        </form>
+      </div>
+    </div>
+  </div>
+{% endblock content %}

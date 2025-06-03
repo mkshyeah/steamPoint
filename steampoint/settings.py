@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'users.apps.UsersConfig',
     'registration.apps.RegistrationConfig',
     'orders.apps.OrdersConfig',
+    'payment.apps.PaymentConfig'
 ]
 
 MIDDLEWARE = [
@@ -141,3 +142,9 @@ MEDIA_ROOT = BASE_DIR / 'media'
 BOOKING_SESSION_ID = 'booking'
 
 AUTH_USER_MODEL = 'registration.REGISTRATION'
+
+STRIPE_PUBLISHABLE_KEY = 'pk_test_51RVscC2NwbaP1b5uQQasyErdJeP9EBX4jOJS4utSXdaIyjRdUoNMaptGRhqp3oqiE2SeAaHTUqbSFzriCCvZwwDQ00yZ5yXDHN'
+STRIPE_SECRET_KEY = 'sk_test_51RVscC2NwbaP1b5uRrWsYlXKYKQrickEZIsRp4oZru5WpSrFakb9LH26o1RPkBnWks18sjhsmmDfh7Knc2TlTp5z00NSQUJlkg'
+STRIPE_API_VERSION = '2022-08-01'
+
+STRIPE_WEBHOOK_SECRET = 'whsec_b9f71857d65e28128465a249d6502e330aee18017d460eaa341fd18709a72322'

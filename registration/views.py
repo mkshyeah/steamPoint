@@ -46,19 +46,19 @@ def register(request):
 @login_required
 def profile(request):
   if request.method=="POST":
-    form = ProfileForm(data=request.POST, isinstance=request.user,
+    form = ProfileForm(data=request.POST, instance=request.user,
                        files=request.FILES)
     if form.is_valid():
       form.save()
       messages.success(request,"Профиль был изменен")
       return HttpResponseRedirect(reverse('registration:profile'))
   else:
-    form = ProfileForm(isinstance=request.user)
+    form = ProfileForm(instance=request.user)
   
   orders = Order.objects.filter(user=request.user).prefetch_related(
     Prefetch(
       'items',
-      queryset=OrderItem.objects.select_related('sauna'),
+      queryset=OrderItem.objects.select_related('saunas'),
     )
   ).order_by('-id')
   return render(request,'registration/profile.html',

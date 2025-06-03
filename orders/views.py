@@ -1,4 +1,5 @@
-from django.shortcuts import render
+from django.shortcuts import render,redirect
+from django.urls import reverse
 from .models import OrderItem
 from .forms import OrderCreateForm
 from booking.booking import Booking
@@ -13,16 +14,15 @@ def order_create(request):
     if form.is_valid():
       order = form.save()
       for item in booking:
+        discounted_price = item['sauna'].sell_price() 
         OrderItem.objects.create(order=order,
                                  saunas=item['sauna'],
-                                 price_per_hour=item['price'],
+                                 price_per_hour=discounted_price,
                                  quantity = item['quantity'])
         
       booking.clear()
-      return render(request,
-                    'order/created.html',
-                    {'order':order,
-                     'form':form})
+      request.session['order_id'] = order.id
+      return redirect(reverse('payment:process'))
       
   else:
     form = OrderCreateForm(request=request)
