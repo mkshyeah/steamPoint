@@ -139,4 +139,4 @@ MEDIA_ROOT = BASE_DIR / 'media'
 
 BOOKING_SESSION_ID = 'booking'
 
-AUTH_USER_MODEL = 'registration.USER'
+AUTH_USER_MODEL = 'registration.REGISTRATION'
