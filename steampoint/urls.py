@@ -23,8 +23,8 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('booking/', include('booking.urls', namespace='booking')),
     path('registration/',include('registration.urls',namespace='registration')),
+    path('orders/',include('orders.urls',namespace='orders')),
     path('',include('users.urls',namespace="users")),
-    
 ]
 
 

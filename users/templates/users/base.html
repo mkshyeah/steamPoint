@@ -35,7 +35,7 @@
             </navbar>
             <div class="header-profile pt-2">
                 <a href="{% url "booking:booking_detail" %}"><img src="{% static 'img/venik.png' %}" class="venik" alt=""></a>
-                <a href="#" class="m-3">Войти</a>
+                <a href="{% url "registration:login" %}" class="m-3">Войти</a>
                 <p class="booking-quantity">
                   {% with booking_quantity=booking|length %}
                     {% if booking_quantity > 0 %}

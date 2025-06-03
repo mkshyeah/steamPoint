@@ -48,7 +48,7 @@
         <a href="/shop" class="booking-btn">Продолжить покупки</a>
         {% with booking_quantity=booking|length %}
           {% if booking_quantity > 0 %}
-            <a href="#" class="booking-btn">Оформить</a>
+            <a href="{% url "orders:order_create" %}" class="booking-btn">Оформить</a>
           {% endif %}
         {% endwith %}       
       </div>
