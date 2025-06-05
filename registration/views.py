@@ -25,7 +25,7 @@ def login(request):
     form = RegistrationLoginForm()
       
       
-    return render(request,'registration/login.html',{'form':form})
+  return render(request,'registration/login.html',{'form':form})
 
   
 def register(request):
@@ -34,14 +34,14 @@ def register(request):
     if form.is_valid():
       form.save()
       user = form.instance
-      auth.loin(request,user)
+      auth.login(request,user)
       messages.success(
         request,f'{user.username}, Регистрация прошла успешно'
       )
       return HttpResponseRedirect(reverse('registration:login'))
   else:
     form = UserRegistrationForm()
-  return render(request,'registration/register.html')
+  return render(request,'registration/register.html',{'form': form})
 
 @login_required
 def profile(request):
@@ -61,6 +61,7 @@ def profile(request):
       queryset=OrderItem.objects.select_related('saunas'),
     )
   ).order_by('-id')
+  
   return render(request,'registration/profile.html',
                 {'form':form,
                  'orders':orders})

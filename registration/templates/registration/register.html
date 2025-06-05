@@ -7,6 +7,11 @@
   <section class="login-reg d-flex">
     <div class="login-title">
       <h3>Регистрация</h3>
+      {% if form.errors %}
+        <div class="alert alert-danger">
+          {{ form.errors }}
+        </div>
+      {% endif %}
       <form action="{% url "registration:register" %}" method="post">
         {% csrf_token %}
         <div class="row">
@@ -35,7 +40,7 @@
             name="email" placeholder="Ваш Email" required>
           </div>
           <div class="col-md-6 mb-3">
-            <label for="id_email" class="form-label form-style-reg">Пароль</label>
+            <label for="id_password1" class="form-label form-style-reg">Пароль</label>
             <input type="password" class="form-control form-style-reg" id="id_password1" 
             value="{% if form.password1.value %}{{form.password1.value}}{% endif %}"
             name="password1" placeholder="Ваш пароль" required>
@@ -43,7 +48,7 @@
           <div class="col-md-6 mb-3">
             <label for="id_password2" class="form-label form-style-reg">Повторите пароль</label>
             <input type="password" class="form-control form-style-reg" id="id_password2" 
-            value="{% if form.email.value %}{{form.password2.value}}{% endif %}"
+            value="{% if form.password2.value %}{{form.password2.value}}{% endif %}"
             name="password2" placeholder="Ваш пароль" required>
           </div>
         </div>

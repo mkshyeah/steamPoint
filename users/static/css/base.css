@@ -185,8 +185,8 @@ input:focus {
 }
 
 .detail-image{
-    width: 650px;
-    height: 650px
+    width: 550px;
+    height: 550px
 }
 
 .detail-sauna{
@@ -706,8 +706,8 @@ input:focus {
 }
 
 .detail-image {
-    width: 650px;
-    height: 650px;
+    width: 550px;
+    height: 550px;
 }
 
 .detail-product {
@@ -1170,7 +1170,7 @@ input:focus {
 .orderss {
     margin-left: 70px;
     width: 520px;
-    max-height: 52vh; 
+    max-height: 37vh; 
     overflow-y: auto;
 }
 
@@ -1241,12 +1241,12 @@ input:focus {
 
 .prev-btn {
     position: absolute;
-    left: 8%;
+    left: 11%;
 }
 
 .next-btn {
     position: absolute;
-    left: 41%;
+    left: 35%;
 }
 
 .notorders {
